@@ -2,7 +2,6 @@ UPDATE 01
 Grid Turn-Based Game (C++)
 
 ผู้พัฒนา: ณัฐภัทร ขำดี 680610747
-	ณัฎฐ๋ ชัยวรรณ์ 680610746
 วิชา: Computer Programming
 โปรแกรมภาษา: C++
 คอมไพเลอร์: g++
