@@ -1,18 +1,25 @@
+
 #ifndef MAP_H
 #define MAP_H
 
-class Player;
-class Enemy;
+#include <vector>
 
-class Map {
+class Map{
 private:
-    char tiles[6][10];
+    int width,height;
+    std::vector<std::vector<char>> grid;
 
 public:
-    Map();
-    bool isWall(int x, int y);
-    bool isExit(int x, int y);
-    void draw(Player& p, Enemy& e);
+    Map(int w,int h);
+
+    void generate();
+
+    int getWidth();
+    int getHeight();
+
+    bool isWalkable(int x,int y);
+
+    char getTile(int x,int y);
 };
 
 #endif

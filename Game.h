@@ -1,26 +1,38 @@
+
 #ifndef GAME_H
 #define GAME_H
 
-#include "Map.h"
-#include "Player.h"
-#include "Enemy.h"
+#include <vector>
 
-class Game {
+class Map;
+class Player;
+class Enemy;
+
+class Game{
+
 private:
-    Map map;
-    Player player;
-    Enemy enemy;
-    bool playerTurn;
-    bool running;
+    Map* map;
+    Player* player;
+    std::vector<Enemy*> enemies;
 
-    bool checkCollision();
+    int level;
 
 public:
+
     Game();
+    ~Game();
+
+    void generateLevel();
+
+    bool enemyAt(int x,int y);
+    Enemy* getEnemy(int x,int y);
+
+    void draw();
+
+    void playerTurn();
+    void enemyTurn();
+
     void run();
-    void input();
-    void update();
-    void render();
 };
 
 #endif

@@ -1,40 +1,38 @@
-#include <iostream>
+
 #include "Map.h"
-#include "Player.h"
-#include "Enemy.h"
+#include <cstdlib>
 
-Map::Map() {
-    const char* temp[6] = {
-        "##########",
-        "#........#",
-        "#..###...#",
-        "#........#",
-        "#.......O#",
-        "##########"
-    };
-
-    for(int y=0;y<6;y++)
-        for(int x=0;x<10;x++)
-            tiles[y][x] = temp[y][x];
+Map::Map(int w,int h){
+    width=w;
+    height=h;
+    grid.resize(h,std::vector<char>(w,'.'));
 }
 
-bool Map::isWall(int x, int y) {
-    if (x < 0 || x >= 10 || y < 0 || y >= 6)
-        return true;
-    return tiles[y][x] == '#';
-}
+void Map::generate(){
 
-bool Map::isExit(int x, int y) {
-    return tiles[y][x] == 'O';
-}
+    for(int y=0;y<height;y++){
+        for(int x=0;x<width;x++){
 
-void Map::draw(Player& p, Enemy& e) {
-    for(int y=0;y<6;y++) {
-        for(int x=0;x<10;x++) {
-            if (x == p.getX() && y == p.getY()) std::cout << 'P';
-            else if (x == e.getX() && y == e.getY()) std::cout << 'E';
-            else std::cout << tiles[y][x];
+            if(x==0||y==0||x==width-1||y==height-1)
+                grid[y][x]='#';
+            else if(rand()%8==0)
+                grid[y][x]='#';
+            else
+                grid[y][x]='.';
         }
-        std::cout << '\n';
     }
+}
+
+int Map::getWidth(){return width;}
+int Map::getHeight(){return height;}
+
+bool Map::isWalkable(int x,int y){
+
+    if(x<0||y<0||x>=width||y>=height) return false;
+
+    return grid[y][x]=='.';
+}
+
+char Map::getTile(int x,int y){
+    return grid[y][x];
 }
